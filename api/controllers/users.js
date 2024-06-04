@@ -22,6 +22,25 @@ const create = (req, res) => {
     });
 };
 
+const getAllUsers = async (req, res) => {
+  const users = await User.find();
+  const token = generateToken(req.user_id);
+  res.status(200).json({ users: users, token: token });
+};
+
+const sendFriendRequest = async (req, res) => {
+  const recipient = req.body.recipient;
+  const sender = req.body.sender;
+  const adding = req.body.adding;
+  if (adding) {
+    await User.findByIdAndUpdate(recipient, { $push: { friend_req: sender }});
+    res.status(200).json({ message: "Sent request" });
+  } else {
+    await User.findByIdAndUpdate(recipient, { $pull: { friend_req: sender }});
+    res.status(200).json({ message: "Removed request" });
+  }
+}
+
 const getUserById = async (req, res) => {
   const user_id = req.params.user_id;
   const user = await User.findById(user_id);
@@ -33,7 +52,9 @@ const getUserById = async (req, res) => {
 
 const UsersController = {
   create: create,
-  getUserById: getUserById
+  getUserById: getUserById,
+  getAllUsers: getAllUsers,
+  sendFriendRequest: sendFriendRequest
 };
 
 module.exports = UsersController;

@@ -5,6 +5,7 @@ import { getPosts } from "../../services/posts";
 import Post from "../../components/Post/Post";
 import MakePost from "../../components/Post/MakePost";
 import LogoutButton from "../../components/LogoutButton";
+import { UserSearch } from "../Profile/UserSearch";
 
 export const FeedPage = () => {
   const [posts, setPosts] = useState([]);
@@ -36,6 +37,7 @@ export const FeedPage = () => {
 
   return (
     <>
+      <UserSearch />
       <MakePost value={refresh} update={setRefresh} />
       <LogoutButton />
       <Link to={`/profile/${user_id}`}>Your Profile</Link>
