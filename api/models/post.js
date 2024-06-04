@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
 const PostSchema = new mongoose.Schema({
   message: String,
   date: Date,
-  like_array: Array
+  like_array: Array,
+  email: { type: String }
 });
 
 // We use the Schema to create the Post model. Models are classes which we can
