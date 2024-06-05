@@ -32,15 +32,12 @@ const updateLikes = async (req, res) => {
 const createPost = async (req, res) => {
   const user_id = req.user_id; 
   const user = await User.findById(user_id);
-  console.log(user)
-
 
   if (!user) {
     return res.status(404).json({ message: "User not found" });
   }
 
   const email = user.email;
-  console.log(email)
 
   const post = new Post({
     ...req.body,
@@ -49,10 +46,8 @@ const createPost = async (req, res) => {
   });
   await post.save();
 
-  console.log("Post created:", post); 
-
   const newToken = generateToken(req.user_id);
-  res.status(201).json({ message: "Post created", email: user.email, token: newToken });
+  res.status(201).json({ message: "Post created", token: newToken });
 };
 
 const PostsController = {
