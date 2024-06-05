@@ -22,18 +22,20 @@ export const SignupPage = () => {
         notEmpty(field);
       })
       passwordValidator(password)
+      try {
+        await signup(fullname, email, password);
+        console.log("redirecting...:");
+        navigate("/login");
+      } catch (err) {
+        console.error(err);
+        navigate("/signup");
+      }
     } catch (err) {
       alert(err)
+      navigate("/signup")
     }
 
-    try {
-      await signup(fullname, email, password);
-      console.log("redirecting...:");
-      navigate("/login");
-    } catch (err) {
-      console.error(err);
-      navigate("/signup");
-    }
+    
   };
 
   const handleFullNameChange = (event) => {
