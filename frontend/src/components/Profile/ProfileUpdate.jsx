@@ -11,9 +11,7 @@ export const ProfileUpdate = ({profile}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const updatedProfile = await updateUserProfile(token, email, fullName, bio, profile._id);
-      console.log("updatedProfile", updatedProfile)
-      
+      await updateUserProfile(token, email, fullName, bio, profile._id);      
     } catch (err) {
       console.error(err);
     }
@@ -43,7 +41,7 @@ export const ProfileUpdate = ({profile}) => {
           placeholder="Email"
           id="email"
           type="text"
-          value={email}
+          value={email ?? ''}
           onChange={handleEmailChange}
         /><br/>
         <label htmlFor="fullName">Full Name:</label>
@@ -51,7 +49,7 @@ export const ProfileUpdate = ({profile}) => {
           placeholder="Full Name"
           id="fullName"
           type="text"
-          value={fullName}
+          value={fullName ?? ''}
           onChange={handleFullNameChange}
         /><br/>
         <label htmlFor="bio">Bio:</label>

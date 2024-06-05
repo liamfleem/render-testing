@@ -39,7 +39,6 @@ const getUserById = async (req, res) => {
 
 
 const updateProfile = async (req, res) => {
-  console.log("\n\n\n\nreq.body is:", req.body);
   const user_id = req.params.user_id;
 
   try {
