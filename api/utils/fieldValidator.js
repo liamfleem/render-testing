@@ -4,6 +4,7 @@ export const notEmpty = (inputtedText) => {
     }
 }
 
+// executes on submission
 export const passwordValidator = (password) => {
     const regexLength = /^.{8,}$/;
     const regexCase = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
@@ -16,3 +17,9 @@ export const passwordValidator = (password) => {
         throw new Error("Password must contain at least one number")
     }
 }
+
+export const regexLengthValidator = (password) => {
+    const regexLength = /^.{8,}$/;
+    return regexLength.test(password);
+}
+

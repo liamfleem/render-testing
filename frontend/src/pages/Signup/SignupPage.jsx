@@ -1,16 +1,29 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../../services/authentication";
-import {passwordValidator, notEmpty} from "../../../../api/utils/fieldValidator";
+import {passwordValidator, notEmpty, regexLengthValidator} from "../../../../api/utils/fieldValidator";
+import '../Signup/Signup.css';
 
 export const SignupPage = () => {
   
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullname, setFullName] = useState("");
+  const [fullname, setFullName] = useState("");  
 
   const fields = [email, password, fullname]
+
+  const [lengthValidator, setLengthValidator] = useState(false);
+  //const [caseValidator, setCaseValidator] = useState(false);
+  //const [numberValidator, setNumberValidator] = useState(false);
+
+  const returnValidatedClass = (validator) => {
+    if (validator === true) {
+      return 'validator-true';
+    } else {
+      return 'validator-false';
+    }
+  }
 
   const navigate = useNavigate();
 
@@ -48,6 +61,9 @@ export const SignupPage = () => {
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+    // setCaseValidator(password);
+    setLengthValidator(regexLengthValidator(password));
+    // setNumberValidator(password);
   };
 
 
@@ -83,7 +99,7 @@ export const SignupPage = () => {
             value={password}
             onChange={handlePasswordChange}
           />
-          <p className= "password-requirements" id="length">Must be 8+ characters </p>
+          <p className = {returnValidatedClass(lengthValidator)}>Must be 8+ characters</p>
           <p className= "password-requirements" id="case">Must contain upper and lowercase</p>
           <p className= "password-requirements" id="number">Must contain at least one number</p>
         </div>

@@ -32,7 +32,7 @@ export const LoginPage = () => {
       localStorage.setItem("user_id", user_id);
       navigate("/posts");
     } catch (err) {
-      console.error(err);
+      alert(err);
       navigate("/login");
     }
   };
