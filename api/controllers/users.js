@@ -2,18 +2,16 @@ const User = require("../models/user");
 const slugify = require("../lib/slugify");
 const { generateToken } = require("../lib/token");
 
+
 const create = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  const fullname = req.body.fullname
-  const slug = slugify(fullname)
+  const fullName = req.body.fullName
+  const slug = slugify(fullName)
 
-  const user = new User({fullname, email, password, slug });
-  user
-    
-    .save()
-    .then((user) => {
-      console.log("User created, id:", user._id.toString());
+  const user = new User({fullName, email, password, slug });
+  user.save()
+    .then(() => {
       res.status(201).json({ message: "OK" });
     })
     .catch((err) => {
@@ -43,16 +41,43 @@ const sendFriendRequest = async (req, res) => {
 
 const getUserById = async (req, res) => {
   const user_id = req.params.user_id;
-  const user = await User.findById(user_id);
-  // const user = await User.findOne( {_id: user_id});
-  // const users = await User.find()
-  const token = generateToken(req.user_id);
-  res.status(200).json({ user: user, token: token });
+  
+  try {
+    const user = await User.findById(user_id); // same as User.findOne( {_id: user_id});
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const token = generateToken(req.user_id);
+    res.status(200).json({ message: "Profile fetched successfully", user: user , token: token });
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
+
+
+const updateProfile = async (req, res) => {
+  const user_id = req.params.user_id;
+
+  try {
+    const user = await User.findById(user_id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const updatedUser = await User.findByIdAndUpdate(user_id, { $set: req.body}, { new: true });
+    
+    res.status(200).json({ message: "Profile updated successfully", updatedUser: updatedUser });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 
 const UsersController = {
   create: create,
   getUserById: getUserById,
+  updateProfile,
   getAllUsers: getAllUsers,
   sendFriendRequest: sendFriendRequest
 };

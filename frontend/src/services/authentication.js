@@ -20,7 +20,6 @@ export const login = async (email, password) => {
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
   if (response.status === 201) {
     let data = await response.json();
-    console.log(data);
     return data;
   } else {
     throw new Error(
@@ -29,11 +28,11 @@ export const login = async (email, password) => {
   }
 };
 
-export const signup = async (fullname, email, password) => {
+export const signup = async (fullName, email, password) => {
   const payload = {
     email: email,
     password: password,
-    fullname: fullname
+    fullName: fullName
   };
 
   const requestOptions = {

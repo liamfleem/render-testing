@@ -9,6 +9,9 @@ import { UserSearch } from "../Profile/UserSearch";
 
 export const FeedPage = () => {
   const [posts, setPosts] = useState([]);
+  // Remove in future. Find a better way of rerendering componants and not rerendeing the whole feed page
+  // Possibly start investingating at Like.jsx??
+  // Changes necessary to MakePost.jsx
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const user_id = localStorage.getItem("user_id");
@@ -28,13 +31,15 @@ export const FeedPage = () => {
     }
   }, [navigate, refresh]);
 
-  // needs tests to account for edge case like getting here by typing in the URL without being logged in instead of navigating here through the website
+  // needs tests to account for edge case
+  // like getting here by typing in the URL without being logged in
+  // instead of navigating here through the website
   const token = localStorage.getItem("token");
   if (!token) {
     navigate("/login");
     return;
   }
-
+  let parentPosts = posts.filter((item) => !item.parent)
   return (
     <>
       <UserSearch />
@@ -43,7 +48,7 @@ export const FeedPage = () => {
       <Link to={`/profile/${user_id}`}>Your Profile</Link>
       <h2>Posts</h2>
       <div className="feed" role="feed">
-        {posts.map((post) => (
+        {parentPosts.map((post) => (
           <Post post={post} key={post._id} value={refresh} update={setRefresh} />
         ))}
       </div>
