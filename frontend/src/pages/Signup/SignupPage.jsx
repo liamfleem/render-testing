@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../../services/authentication";
 import {passwordValidator, notEmpty} from "../../../../api/utils/fieldValidator";
-import '../Signup/Signup.css';
 
 export const SignupPage = () => {
   const [email, setEmail] = useState("");

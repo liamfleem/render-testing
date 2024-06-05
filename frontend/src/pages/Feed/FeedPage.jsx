@@ -41,7 +41,6 @@ export const FeedPage = () => {
   let parentPosts = posts.filter((item) => !item.parent)
   return (
     <>
-    {/* {console.log('\n\nlocalStorage.getItem("user_id") is', user_id)} */}
       <MakePost value={refresh} update={setRefresh} />
       <LogoutButton />
       <Link to={`/profile/${user_id}`}>Your Profile</Link>
