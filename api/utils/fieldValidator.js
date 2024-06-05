@@ -6,7 +6,7 @@ export const notEmpty = (inputtedText) => {
 
 // executes on submission
 export const passwordValidator = (password) => {
-    const regexLength = /^.{8,}$/;
+    const regexLength = /^.{7,}$/;
     const regexCase = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
     const regexNumber = /^(?=.*\d).+$/;
     if (regexLength.test(password) === false) {
@@ -18,8 +18,7 @@ export const passwordValidator = (password) => {
     }
 }
 
-export const regexLengthValidator = (password) => {
-    const regexLength = /^.{8,}$/;
-    return regexLength.test(password);
-}
-
+// export const regexLengthValidator = (password) => {
+//     const regexLength = /^.{7,}$/;
+//     return regexLength.test(password);
+// }
