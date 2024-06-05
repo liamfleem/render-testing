@@ -48,7 +48,7 @@ export const makePost = async (token, content, date, parent) => {
     date: date,
     like_array: []
   };
-
+  
   const requestOptions = {
     method: "POST",
     headers: {
