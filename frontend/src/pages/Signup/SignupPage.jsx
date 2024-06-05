@@ -5,8 +5,6 @@ import {passwordValidator, notEmpty} from "../../../../api/utils/fieldValidator"
 import '../Signup/Signup.css';
 
 export const SignupPage = () => {
-  
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -50,10 +48,7 @@ export const SignupPage = () => {
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-    // setLengthValidator(regexLengthValidator(password));
   };
-
-
 
   return (
     <>
