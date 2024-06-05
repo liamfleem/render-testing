@@ -40,7 +40,8 @@ export const updateUserProfile = async (token, email, fullName, bio, user_id) =>
     const response = await fetch(`${BACKEND_URL}/users/${user_id}`, requestOptions);
 
     if (response.status === 200) {
-        return response;
+        const data = await response.json();
+        return data.updatedUser;
     } else {
         throw new Error("Unable to update user profile");
     }

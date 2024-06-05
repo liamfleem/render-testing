@@ -2,16 +2,19 @@
 import { useState } from "react";
 import { updateUserProfile } from "../../services/users";
 
-export const ProfileUpdate = ({profile}) => {
-  const [email, setEmail] = useState(profile.email);
-  const [fullName, setFullName] = useState(profile.fullName);
+export const ProfileUpdate = (props) => {
+  const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
   const [bio, setBio] = useState("");
   const token = localStorage.getItem("token");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await updateUserProfile(token, email, fullName, bio, profile._id);      
+      await updateUserProfile(token, email, fullName, bio, props.profile._id)
+      .then((updatedUser) => {
+        props.setProfile(updatedUser);
+      });
     } catch (err) {
       console.error(err);
     }
@@ -41,7 +44,7 @@ export const ProfileUpdate = ({profile}) => {
           placeholder="Email"
           id="email"
           type="text"
-          value={email ?? ''}
+          value={email}
           onChange={handleEmailChange}
         /><br/>
         <label htmlFor="fullName">Full Name:</label>
@@ -49,7 +52,7 @@ export const ProfileUpdate = ({profile}) => {
           placeholder="Full Name"
           id="fullName"
           type="text"
-          value={fullName ?? ''}
+          value={fullName}
           onChange={handleFullNameChange}
         /><br/>
         <label htmlFor="bio">Bio:</label>
