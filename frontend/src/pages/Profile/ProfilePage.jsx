@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { getUserById } from "../../services/users";
 import { ProfileUpdate } from "../../components/Profile/ProfileUpdate";
 import FriendRequest from "./FriendRequests";
@@ -10,7 +10,7 @@ export const ProfilePage = () => {
     const profile = useParams();
     const user_id = localStorage.getItem("user_id");
     
-    useEffect((event) => {
+    useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
             getUserById(token, profile.user_id)

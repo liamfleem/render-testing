@@ -4,7 +4,6 @@ import { getUserById } from "../../services/users";
 
 const FriendRequest = (props) => {
     const [user, setUser] = useState({})
-    console.log("Rendered")
     useEffect(() => {
         const token = localStorage.getItem("token");
         getUserById(token, props.requester)
