@@ -27,7 +27,7 @@ export const UserSearch = () => {
 		if (searchData === "" || searchData === " ") {
 			setSortedUsers([])
 		} else {
-			setSortedUsers(users.filter((u) => u.fullName.includes(searchData) && u._id != user_id))
+			setSortedUsers(users.filter((u) => u.fullName.toUpperCase().includes(searchData.toUpperCase()) && u._id != user_id))
 		}
 	}, [searchData]);
 

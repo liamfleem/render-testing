@@ -23,7 +23,7 @@ export const ProfilePage = () => {
                     navigate("/login");
                 });
         }
-    }, [navigate, profile_id ]);
+    }, [navigate, profile ]);
 
     const token = localStorage.getItem("token");
     if (!token) {
