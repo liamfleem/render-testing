@@ -36,7 +36,7 @@ export const ProfilePage = () => {
             <h1>{user.fullName}</h1>
             <p>Email: {user.email}</p>
             <p>Bio: {user.bio}</p>
-            {(user_id == profile_id.user_id) && <ProfileUpdate profile={user} />}
+            {(user_id == profile_id.user_id) && <ProfileUpdate profile={user} setProfile={setUser} />}
             {(user_id == profile_id.user_id) && <p>Friend Requests: </p>}
             {(user_id == profile_id.user_id) && user.friend_req &&
                 user.friend_req.map((req) => <FriendRequest key={req} requester={req} />)
