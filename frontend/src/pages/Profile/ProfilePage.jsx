@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { getUserById } from "../../services/users";
 import { ProfileUpdate } from "../../components/Profile/ProfileUpdate";
+import FriendRequest from "./FriendRequests";
 
 export const ProfilePage = () => {
     const [user, setUser] = useState({});
@@ -15,14 +16,14 @@ export const ProfilePage = () => {
             getUserById(token, profile.user_id)
                 .then((data) => {
                     setUser(data.user);
-                localStorage.setItem("token", data.token);
+                    localStorage.setItem("token", data.token);
                 })
                 .catch((err) => {
                     console.error(err);
                     navigate("/login");
                 });
         }
-    }, [navigate]);
+    }, [navigate, profile ]);
 
     const token = localStorage.getItem("token");
     if (!token) {
@@ -36,6 +37,10 @@ export const ProfilePage = () => {
             <p>Email: {user.email}</p>
             <p>Bio: {user.bio}</p>
             {(user_id == profile.user_id) && <ProfileUpdate profile={user} setProfile={setUser} />}
+            {(user_id == profile.user_id) && <p>Friend Requests: </p>}
+            {(user_id == profile.user_id) && user.friend_req &&
+                user.friend_req.map((req) => <FriendRequest key={req} requester={req} />)
+            }
         </>
     );
 };

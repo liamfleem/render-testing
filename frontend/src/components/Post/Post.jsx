@@ -17,7 +17,6 @@ const Post = (props) => {
 
   return (
     <article>
-      {console.log("props is:", props)}
       {props.post.message}    Likes: {props.post.like_array.length} Posted by: {author}
       <Like post={props.post} value={isLiked} update={setLiked}/>
       <CommentButton parent={props.post._id} /*value={props.value} update={props.update}*/ />
