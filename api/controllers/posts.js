@@ -5,7 +5,6 @@ const User = require('../models/user');
 const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find()
-
     const token = generateToken(req.user_id);
     res.status(200).json({ posts: posts, token: token });
   } catch (error) {
@@ -14,8 +13,8 @@ const getAllPosts = async (req, res) => {
 };
 
 const getComments = async (req, res) => {
-  const parent = req.params.parent_id
-  const posts = await Post.find({parent: parent});
+  const parent = req.params.parent_id;
+  const posts = await Post.find({ parent: parent });
   const token = generateToken(req.user_id);
   res.status(200).json({ posts: posts, token: token });
 };
@@ -34,21 +33,10 @@ const updateLikes = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-
-  const user_id = req.user_id; 
-  const user = await User.findById(user_id);
-
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
-  }
-  
   const post = new Post({
-    ...req.body,
-    user: user._id,
-    email: user.email  
+    ...req.body
   });
   await post.save();
-
   const newToken = generateToken(req.user_id);
   res.status(201).json({ message: "Post created", token: newToken });
 };

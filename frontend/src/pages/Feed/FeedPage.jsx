@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getPosts } from "../../services/posts";
 import Post from "../../components/Post/Post";
 import MakePost from "../../components/Post/MakePost";
-import LogoutButton from "../../components/LogoutButton";
+import LogoutButton from "../../components/Navigation/LogoutButton";
+import { UserSearch } from "../../components/User/UserSearch";
 
 export const FeedPage = () => {
   const [posts, setPosts] = useState([]);
@@ -38,9 +38,12 @@ export const FeedPage = () => {
     navigate("/login");
     return;
   }
+  
   let parentPosts = posts.filter((item) => !item.parent)
+  
   return (
     <>
+      <UserSearch />
       <MakePost value={refresh} update={setRefresh} />
       <LogoutButton />
       <Link to={`/profile/${user_id}`}>Your Profile</Link>
