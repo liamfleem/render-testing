@@ -41,10 +41,10 @@ export const getComments = async (token, parent_id) => {
   return data;
 };
 
-export const makePost = async (token, content, date, parent, user_id) => {
+export const makePost = async (token, content, date, parent, author_id) => {
   const payload = {
     parent: parent,
-    user_id: user_id,
+    author_id: author_id,
     message: content,
     date: date,
     like_array: []

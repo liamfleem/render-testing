@@ -9,6 +9,7 @@ const Like = (props) => {
     // liked = !liked;
     changeLike(token, props.post._id, user_id, !props.value)
     .catch((err) => {console.error(err)});
+    console.log("Like props is:", props)
     props.update(!props.value);
   };
 

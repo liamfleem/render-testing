@@ -9,7 +9,8 @@ const Post = (props) => {
   
   return (
     <article /*key={props.post._id}*/>
-      {props.post.message}    Likes: {props.post.like_array.length} Posted by: {props.post._id}
+      {console.log("props is:", props)}
+      {props.post.message}    Likes: {props.post.like_array.length} Posted by: {props.post.author_id}
       <Like post={props.post} value={isLiked} update={setLiked}/>
       <CommentButton parent={props.post._id} /*value={props.value} update={props.update}*/ />
       <ShowComments parent={props.post._id} /*value={props.value} update={props.update}*/ />

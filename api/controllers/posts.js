@@ -1,6 +1,5 @@
 const Post = require("../models/post");
 const { generateToken } = require("../lib/token");
-const User = require('../models/user');
 
 const getAllPosts = async (req, res) => {
   try {
