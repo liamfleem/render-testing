@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getPosts } from "../../services/posts";
 import Post from "../../components/Post/Post";
 import MakePost from "../../components/Post/MakePost";
@@ -39,7 +38,9 @@ export const FeedPage = () => {
     navigate("/login");
     return;
   }
+  
   let parentPosts = posts.filter((item) => !item.parent)
+  
   return (
     <>
       <UserSearch />

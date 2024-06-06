@@ -11,7 +11,6 @@ const MakePost = (props) => {
         try {
             await makePost(token, postData, dateTimeString, props.parent);
             props.update(!props.value);
-            console.log("Refreshed")
             setPostData("");
         } catch (err) {
             console.error(err);
@@ -21,11 +20,12 @@ const MakePost = (props) => {
     const handlePostChange = (event) => {
         setPostData(event.target.value);
     };
+
     return (
         <>
         <div id="make-post">
             <form onSubmit={handleSubmit}>
-                <label htmlFor = "new-post">
+                <label htmlFor="new-post">
                 Write a post!
                 </label>
                 <textarea

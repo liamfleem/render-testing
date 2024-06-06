@@ -2,7 +2,6 @@ const User = require("../models/user");
 const slugify = require("../lib/slugify");
 const { generateToken } = require("../lib/token");
 
-
 const create = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -55,7 +54,6 @@ const getUserById = async (req, res) => {
   }
 };
 
-
 const updateProfile = async (req, res) => {
   const user_id = req.params.user_id;
 
@@ -65,7 +63,6 @@ const updateProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     const updatedUser = await User.findByIdAndUpdate(user_id, { $set: req.body}, { new: true });
-    
     res.status(200).json({ message: "Profile updated successfully", updatedUser: updatedUser });
   } catch (error) {
     console.error("Error updating profile:", error);
@@ -73,11 +70,10 @@ const updateProfile = async (req, res) => {
   }
 };
 
-
 const UsersController = {
   create: create,
   getUserById: getUserById,
-  updateProfile,
+  updateProfile: updateProfile,
   getAllUsers: getAllUsers,
   sendFriendRequest: sendFriendRequest
 };

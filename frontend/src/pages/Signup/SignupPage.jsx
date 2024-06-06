@@ -6,16 +6,12 @@ import {passwordValidator, notEmpty} from "../../../../api/utils/fieldValidator"
 export const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [fullName, setFullName] = useState("");  
-
   const fields = [email, password, fullName]
-
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
     try {
       fields.forEach(field => {
         notEmpty(field);
@@ -33,8 +29,6 @@ export const SignupPage = () => {
       alert(err)
       navigate("/signup")
     }
-
-    
   };
 
   const handleFullNameChange = (event) => {
