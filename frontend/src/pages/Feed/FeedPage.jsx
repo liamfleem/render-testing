@@ -11,7 +11,7 @@ export const FeedPage = () => {
   // Remove in future. Find a better way of rerendering componants and not rerendeing the whole feed page
   // Possibly start investingating at Like.jsx??
   // Changes necessary to MakePost.jsx
-  const [refresh, setRefresh] = useState(false);
+  // const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const user_id = localStorage.getItem("user_id");
 
@@ -28,7 +28,7 @@ export const FeedPage = () => {
           navigate("/login");
         });
     }
-  }, [navigate, refresh]);
+  }, [navigate/*, refresh*/]);
 
   // needs tests to account for edge case
   // like getting here by typing in the URL without being logged in
@@ -44,13 +44,14 @@ export const FeedPage = () => {
   return (
     <>
       <UserSearch />
-      <MakePost value={refresh} update={setRefresh} />
+      {/* <MakePost value={refresh} update={setRefresh} /> */}
+      <MakePost value={posts} update={setPosts} />
       <LogoutButton />
       <Link to={`/profile/${user_id}`}>Your Profile</Link>
       <h2>Posts</h2>
       <div className="feed" role="feed">
         {parentPosts.map((post) => (
-          <Post post={post} key={post._id} value={refresh} update={setRefresh} />
+          <Post post={post} key={post._id} /*value={refresh} update={setRefresh}*/ />
         ))}
       </div>
     </>
