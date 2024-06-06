@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUsers } from "../../services/users";
-import User from "../../components/User/User";
+import User from "./User";
 
 export const UserSearch = () => {
 	const [searchData, setSearchData] = useState("");

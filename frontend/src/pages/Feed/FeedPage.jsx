@@ -3,8 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { getPosts } from "../../services/posts";
 import Post from "../../components/Post/Post";
 import MakePost from "../../components/Post/MakePost";
-import LogoutButton from "../../components/LogoutButton";
-import { UserSearch } from "../Profile/UserSearch";
+import LogoutButton from "../../components/Navigation/LogoutButton";
+import { UserSearch } from "../../components/User/UserSearch";
 
 export const FeedPage = () => {
   const [posts, setPosts] = useState([]);

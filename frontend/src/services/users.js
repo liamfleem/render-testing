@@ -82,7 +82,7 @@ export const sendFriendReq = async (token, sender_id, user_id, add) => {
       body: JSON.stringify(payload),
     };
   
-    let response = await fetch(`${BACKEND_URL}/users/${user_id}`, requestOptions);
+    let response = await fetch(`${BACKEND_URL}/users/befriend/${user_id}`, requestOptions);
   
     // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
     if (response.status === 200) {
