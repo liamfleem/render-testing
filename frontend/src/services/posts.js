@@ -63,7 +63,8 @@ export const makePost = async (token, content, date, parent, user_id) => {
 
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
   if (response.status === 201) {
-    return;
+    const data = await response.json();
+    return [data.post];
   } else {
     throw new Error("Unable to create posts");
   }

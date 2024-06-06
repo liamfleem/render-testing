@@ -10,8 +10,10 @@ const MakePost = (props) => {
         const token = localStorage.getItem("token");
         const user_id = localStorage.getItem("user_id");
         try {
-            await makePost(token, postData, dateTimeString, props.parent, user_id);
-            props.update(!props.value);
+            await makePost(token, postData, dateTimeString, props.parent)
+            .then((newPost) => {
+                props.update(newPost.concat(props.value))
+            });
             setPostData("");
         } catch (err) {
             console.error(err);
