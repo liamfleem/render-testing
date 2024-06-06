@@ -8,8 +8,9 @@ const MakePost = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const token = localStorage.getItem("token");
+        const user_id = localStorage.getItem("user_id");
         try {
-            await makePost(token, postData, dateTimeString, props.parent);
+            await makePost(token, postData, dateTimeString, props.parent, user_id);
             props.update(!props.value);
             setPostData("");
         } catch (err) {

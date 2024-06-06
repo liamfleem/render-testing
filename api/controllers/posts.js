@@ -33,15 +33,8 @@ const updateLikes = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const user_id = req.user_id; 
-  const user = await User.findById(user_id);
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
-  }
   const post = new Post({
-    ...req.body,
-    user: user._id,
-    email: user.email  
+    ...req.body
   });
   await post.save();
   const newToken = generateToken(req.user_id);
