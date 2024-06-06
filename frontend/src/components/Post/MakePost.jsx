@@ -8,10 +8,10 @@ const MakePost = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const token = localStorage.getItem("token");
+        const user_id = localStorage.getItem("user_id");
         try {
-            await makePost(token, postData, dateTimeString, props.parent);
+            await makePost(token, postData, dateTimeString, props.parent, user_id);
             props.update(!props.value);
-            console.log("Refreshed")
             setPostData("");
         } catch (err) {
             console.error(err);
@@ -21,11 +21,12 @@ const MakePost = (props) => {
     const handlePostChange = (event) => {
         setPostData(event.target.value);
     };
+
     return (
         <>
         <div id="make-post">
             <form onSubmit={handleSubmit}>
-                <label htmlFor = "new-post">
+                <label htmlFor="new-post">
                 Write a post!
                 </label>
                 <textarea

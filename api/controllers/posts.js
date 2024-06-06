@@ -1,15 +1,20 @@
 const Post = require("../models/post");
 const { generateToken } = require("../lib/token");
+const User = require('../models/user');
 
 const getAllPosts = async (req, res) => {
-  const posts = await Post.find();
-  const token = generateToken(req.user_id);
-  res.status(200).json({ posts: posts, token: token });
+  try {
+    const posts = await Post.find()
+    const token = generateToken(req.user_id);
+    res.status(200).json({ posts: posts, token: token });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
 };
 
 const getComments = async (req, res) => {
-  const parent = req.params.parent_id
-  const posts = await Post.find({parent: parent});
+  const parent = req.params.parent_id;
+  const posts = await Post.find({ parent: parent });
   const token = generateToken(req.user_id);
   res.status(200).json({ posts: posts, token: token });
 };
@@ -28,9 +33,10 @@ const updateLikes = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const post = new Post(req.body);
-  post.save();
-
+  const post = new Post({
+    ...req.body
+  });
+  await post.save();
   const newToken = generateToken(req.user_id);
   res.status(201).json({ message: "Post created", token: newToken });
 };

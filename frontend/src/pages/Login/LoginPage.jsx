@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { login } from "../../services/authentication";
-
 import { notEmpty } from "../../../../api/utils/fieldValidator";
 
 export const LoginPage = () => {

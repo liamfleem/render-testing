@@ -41,14 +41,15 @@ export const getComments = async (token, parent_id) => {
   return data;
 };
 
-export const makePost = async (token, content, date, parent) => {
+export const makePost = async (token, content, date, parent, user_id) => {
   const payload = {
     parent: parent,
+    user_id: user_id,
     message: content,
     date: date,
     like_array: []
   };
-
+  
   const requestOptions = {
     method: "POST",
     headers: {
