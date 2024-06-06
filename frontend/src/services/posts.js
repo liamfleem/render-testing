@@ -41,10 +41,10 @@ export const getComments = async (token, parent_id) => {
   return data;
 };
 
-export const makePost = async (token, content, date, parent, user_id) => {
+export const makePost = async (token, content, date, parent, author_id) => {
   const payload = {
     parent: parent,
-    user_id: user_id,
+    author_id: author_id,
     message: content,
     date: date,
     like_array: []
@@ -63,7 +63,8 @@ export const makePost = async (token, content, date, parent, user_id) => {
 
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
   if (response.status === 201) {
-    return;
+    const data = await response.json();
+    return [data.post];
   } else {
     throw new Error("Unable to create posts");
   }

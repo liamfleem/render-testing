@@ -1,6 +1,5 @@
 const Post = require("../models/post");
 const { generateToken } = require("../lib/token");
-const User = require('../models/user');
 
 const getAllPosts = async (req, res) => {
   try {
@@ -38,7 +37,7 @@ const createPost = async (req, res) => {
   });
   await post.save();
   const newToken = generateToken(req.user_id);
-  res.status(201).json({ message: "Post created", token: newToken });
+  res.status(201).json({ message: "Post created", token: newToken, post: post });
 };
 
 const PostsController = {
